@@ -1,0 +1,15 @@
+#! /bin/bash
+
+head -n 37 header.tex > temp.tex
+for CHAPTER in chapters/*.tex
+do
+    echo "\\input{$CHAPTER}"
+    echo "\\pagebreak"
+done >> temp.tex
+echo "\\end{document}" >> temp.tex
+
+mv temp.tex main.tex
+
+tectonic main.tex
+latexmk -c
+open main.pdf
